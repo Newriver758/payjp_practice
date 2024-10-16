@@ -1,5 +1,6 @@
 const pay = () => {
-  const payjp = Payjp('pk_test_450197aae1704f64dd258cc8')
+  const publicKey = gon.public_key // const publicKey = gon.public_keyという記述によって、先ほど設定したgon.public_keyを、変数publicKeyに代入
+  const payjp = Payjp(publicKey) // PAY.JPテスト公開鍵
   const elements = payjp.elements();
   const numberElement = elements.create('cardNumber');
   const expiryElement = elements.create('cardExpiry');
@@ -27,4 +28,5 @@ const pay = () => {
   });
 };
 
-window.addEventListener("turbo:load", pay);
+window.addEventListener("turbo:load", pay); //初めてビューがロードされる時に発生するイベント
+window.addEventListener("turbo:render", pay); //renderメソッドによりビューを表示するために必要なイベント
